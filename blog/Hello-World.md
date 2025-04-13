@@ -9,4 +9,5 @@ summary: "Made with love"
 
 To-Do:
 
-- [*] Fix search
+- [x] Fix Search
+- [ ] Better UI
