@@ -366,6 +366,7 @@ div.highlight:hover .code-copy-button {
     }
 }
 
+
 ul.task-list {
     list-style-type: none;
     padding-left: 0.5em;
@@ -391,4 +392,91 @@ li.task-list-item > input[type="checkbox"] {
 li.task-list-item.task-list-item-checked {
      text-decoration: line-through; 
      color: var(--muted-text-color);
+}
+
+
+
+.site-footer .footer-links {
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+    display: flex; /* Use flexbox for alignment */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    justify-content: center; /* Center links */
+    align-items: center; /* Align items vertically */
+    gap: 0.5rem 1rem; /* Row gap and column gap */
+}
+
+.site-footer .footer-links a {
+    color: var(--muted-text-color);
+    text-decoration: none; /* Remove underline from links */
+    display: inline-flex; /* Align icon and text */
+    align-items: center;
+    transition: color 0.2s ease;
+}
+
+.site-footer .footer-links a:hover {
+    color: var(--link-color);
+    text-decoration: none; /* Keep underline off on hover */
+}
+
+/* Style the icons */
+.site-footer .footer-links a i {
+    margin-right: 0.4em; /* Space between icon and text */
+    font-size: 1.1em; /* Slightly larger icon */
+    /* vertical-align: middle; */ /* Alternative alignment if not using flex */
+}
+
+/* Hide separators on small screens if links wrap (optional) */
+.site-footer .footer-links .separator {
+   color: var(--muted-text-color);
+   
+}
+
+@media (max-width: 480px) {
+   .site-footer .footer-links .separator {
+      display: none; /* Hide separators on very small screens */
+   }
+    .site-footer .footer-links {
+        gap: 0.8rem; /* Increase gap when wrapped */
+    }
+}
+
+
+.site-footer .copyright {
+    margin-top: 1rem; /* Add space above copyright */
+    margin-bottom: 0.2rem;
+}
+.site-footer .generated-by {
+    font-size: 0.8rem;
+    color: var(--muted-text-color);
+}
+
+
+
+.post-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.post-title {
+    margin-top: 0; 
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem; 
+    line-height: 1.2;
+}
+
+.post-meta {
+    margin-bottom: 0;
+}
+
+/* Styling for the back navigation */
+.post-navigation {
+    margin-top: 2.5rem; /* Space above the back link */
+    padding-top: 1rem; /* Space within the nav area */
+    border-top: 1px solid var(--border-color); /* Optional top border */
+}
+
+.post-navigation a {
+    font-weight: bold;
 }
