@@ -7,3 +7,5 @@ summary: "Made with love"
 
 ## Welcome to my Blog
 
+To-Do:
+- [ ] Fix search
