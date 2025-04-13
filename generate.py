@@ -14,7 +14,7 @@ BLOG_SOURCE_DIR = Path("blog")
 TEMPLATES_DIR = Path("templates")
 STATIC_SOURCE_DIR = Path("static")
 OUTPUT_DIR = Path("docs")
-SITE_BASE_URL = ""
+SITE_BASE_URL = "https://sajjadtalks.github.io/blog/"
 POSTS_PER_PAGE = 10
 # PYGMENTS_STYLE = 'friendly' # Or 'monokai', 'friendly', etc.
 
