@@ -1,63 +1,51 @@
 name: Build and Deploy Static Blog to gh-pages
 
 on:
-  # Triggers the workflow on push events but only for the main branch
   push:
     branches: [ main ]
-    # Only run if changes are detected in these source paths
     paths:
       - 'blog/**'
       - 'templates/**'
       - 'static/**'
       - 'generate.py'
       - 'requirements.txt'
-      - '.github/workflows/build-site.yml' # Optional: Run if the workflow itself changes
+      - '.github/workflows/build-site.yml'
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Permissions needed for the deploy action
 permissions:
-  contents: write # Allows actions-gh-pages to push to the gh-pages branch
+  contents: write
 
 jobs:
-  build-and-deploy: # Renamed job for clarity
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Check out the repository code from the 'main' branch
       - name: Checkout repository
         uses: actions/checkout@v4
-        # No need to specify branch here, defaults to the triggering branch (main)
 
-      # 2. Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
 
-      # 3. Install dependencies
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # 4. Run the static site generator script (outputs to ./docs)
       - name: Build the static site
-        run: python generate.py
+        run: python generate.py 
 
-      # 5. Deploy the content of the 'docs' folder to the 'gh-pages' branch
+      - name: Create .nojekyll file
+        run: touch ./docs/.nojekyll
+
+      # --- Deploy Step (no changes needed here) ---
       - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v4 # Use the dedicated action
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }} # Provided by GitHub Actions
-          publish_dir: ./docs # The directory containing the built site files
-          publish_branch: gh-pages # The branch to deploy to
-          user_name: 'github-actions[bot]' # Committer name
-          user_email: 'github-actions[bot]@users.noreply.github.com' # Committer email
-          commit_message: 'Automated build: Deploy updates to gh-pages [skip ci]' # Commit message for the gh-pages branch
-          # Optional: Force push/clean branch history (recommended for build artifacts)
-          # force_orphan: true
-          # Optional: Keep CNAME file if you use one
-          # keep_files: true
-          # Optional: Exclude specific files/folders from the build dir if needed
-          # exclude_assets: '.github,README.md'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gh-pages
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'Automated build: Deploy updates to gh-pages [skip ci]'
