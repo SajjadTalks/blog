@@ -1,6 +1,6 @@
 ---
 title: "Python Program to Find the Sum of Natural Numbers"
-date: 2025-04-13
+date: 2025-04-13 14:00:00
 author: "SajjadTalks"
 summary: "Test Markdwon Code"
 ---
