@@ -1,80 +1,63 @@
-name: Build and Deploy Static Blog
-
+name: Build and Deploy Static Blog to gh-pages
 
 on:
+  # Triggers the workflow on push events but only for the main branch
   push:
     branches: [ main ]
+    # Only run if changes are detected in these source paths
     paths:
       - 'blog/**'
       - 'templates/**'
       - 'static/**'
       - 'generate.py'
       - 'requirements.txt'
-      - '.github/workflows/build-site.yml'
+      - '.github/workflows/build-site.yml' # Optional: Run if the workflow itself changes
 
-
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+# Permissions needed for the deploy action
 permissions:
-  contents: write
+  contents: write # Allows actions-gh-pages to push to the gh-pages branch
 
 jobs:
-  build:
-    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+  build-and-deploy: # Renamed job for clarity
+    runs-on: ubuntu-latest
 
     steps:
-
+      # 1. Check out the repository code from the 'main' branch
       - name: Checkout repository
         uses: actions/checkout@v4
+        # No need to specify branch here, defaults to the triggering branch (main)
 
-
+      # 2. Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11' 
-          cache: 'pip' 
+          python-version: '3.11'
+          cache: 'pip'
 
-
+      # 3. Install dependencies
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-
+      # 4. Run the static site generator script (outputs to ./docs)
       - name: Build the static site
         run: python generate.py
 
-
-      - name: Configure Git User
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-
-      - name: Check for site changes
-        id: check_changes
-        run: |
-          # Add the 'docs' directory to staging
-          # This allows `git diff --staged` to see changes made by generate.py
-          git add docs/
-          # Check if there are any staged changes specifically in docs/
-          # If there are changes, `git diff` will exit with 1, otherwise 0
-          if ! git diff --staged --quiet --exit-code docs/; then
-            echo "Changes detected in docs/ directory."
-            echo "changes_detected=true" >> $GITHUB_OUTPUT
-          else
-            echo "No changes detected in docs/ directory."
-            echo "changes_detected=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Commit and push changes
-        if: steps.check_changes.outputs.changes_detected == 'true' # Only run if changes were detected
-        run: |
-          echo "Committing updated docs/ directory..."
-          # The commit command will use the changes already staged in the previous step
-          git commit -m "Automated build: Update static site files [skip ci]"
-          echo "Pushing changes..."
-          git push origin main # Adjust branch name if necessary
-        # Add [skip ci] to the commit message to prevent this commit from re-triggering the workflow
-
-
-      - name: No changes detected
-        if: steps.check_changes.outputs.changes_detected == 'false'
-        run: echo "No changes in 'docs/' directory to commit."
+      # 5. Deploy the content of the 'docs' folder to the 'gh-pages' branch
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4 # Use the dedicated action
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Provided by GitHub Actions
+          publish_dir: ./docs # The directory containing the built site files
+          publish_branch: gh-pages # The branch to deploy to
+          user_name: 'github-actions[bot]' # Committer name
+          user_email: 'github-actions[bot]@users.noreply.github.com' # Committer email
+          commit_message: 'Automated build: Deploy updates to gh-pages [skip ci]' # Commit message for the gh-pages branch
+          # Optional: Force push/clean branch history (recommended for build artifacts)
+          # force_orphan: true
+          # Optional: Keep CNAME file if you use one
+          # keep_files: true
+          # Optional: Exclude specific files/folders from the build dir if needed
+          # exclude_assets: '.github,README.md'
