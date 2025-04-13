@@ -195,7 +195,7 @@ function initSearchFunctionality() {
     // Function to fetch the search index
     async function fetchSearchIndex() {
         try {
-            const response = await fetch('/search_index.json');
+            const response = await fetch('/blog/search_index.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
