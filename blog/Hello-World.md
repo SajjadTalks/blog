@@ -9,4 +9,4 @@ summary: "Made with love"
 
 To-Do:
 
-- [ ] Fix search
+- [*] Fix search
