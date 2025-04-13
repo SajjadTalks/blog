@@ -19,14 +19,29 @@ POSTS_PER_PAGE = 10
 # PYGMENTS_STYLE = 'friendly' # Or 'monokai', 'friendly', etc.
 
 # --- Setup ---
-md_extensions = ['fenced_code', 'codehilite', 'tables', 'meta', 'extra', 'smarty', 'md_in_html']
-md = markdown.Markdown(extensions=md_extensions, extension_configs={
-    'codehilite': {
-        'css_class': 'highlight',
-        'guess_lang': True,
-        'linenums': True
+md_extensions = [
+    'fenced_code',
+    'codehilite',
+    'tables',
+    'meta',
+    'extra',
+    'smarty',
+    'md_in_html',
+    'pymdownx.tasklist',
+]
+md = markdown.Markdown(
+    extensions=md_extensions,
+    extension_configs={
+        'codehilite': {
+            'css_class': 'highlight',
+            'guess_lang': False,
+            'linenums': False
+        },
+        'pymdownx.tasklist': {
+            'custom_checkbox': False,
         }
-})
+    }
+)
 env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(TEMPLATES_DIR),
     autoescape=jinja2.select_autoescape(['html', 'xml'])

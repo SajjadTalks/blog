@@ -365,3 +365,30 @@ div.highlight:hover .code-copy-button {
         padding: 0.1rem 0.3rem;
     }
 }
+
+ul.task-list {
+    list-style-type: none;
+    padding-left: 0.5em;
+}
+
+
+li.task-list-item {
+    margin-bottom: 0.3em;
+    display: flex;
+    align-items: flex-start;
+}
+
+
+li.task-list-item > input[type="checkbox"] {
+    margin-right: 0.6em;
+    margin-left: 0.1em;
+    margin-top: 0.2em; 
+    cursor: default;
+    vertical-align: middle;
+}
+
+
+li.task-list-item.task-list-item-checked {
+     text-decoration: line-through; 
+     color: var(--muted-text-color);
+}

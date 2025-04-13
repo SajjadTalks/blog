@@ -10,4 +10,5 @@ summary: "Made with love"
 To-Do:
 
 - [x] Fix Search
+- [x] Fix check box
 - [ ] Better UI
