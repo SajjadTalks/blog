@@ -1,18 +1,28 @@
 {% extends "base.html" %}
 
-{% block title %}{{ post.metadata.title }} - My Blog{% endblock %}
+{% block title %}{{ post.metadata.title }} - SajjadTalks Blog{% endblock %} {# Updated Blog Title #}
 
 {% block content %}
 <article class="post">
-    <h2>{{ post.metadata.title }}</h2>
-    <p class="post-meta">
-        Published on {{ post.metadata.date }}
-        {% if post.metadata.author %} by {{ post.metadata.author }}{% endif %}
-    </p>
+
+
+    <header class="post-header">
+        <h1 class="post-title">{{ post.metadata.title }}</h1>
+        <p class="post-meta">
+            Published on {{ post.date_obj.strftime('%B %d, %Y') }} {# Use formatted date_obj #}
+            {% if post.metadata.author %} by {{ post.metadata.author }}{% endif %}
+        </p>
+    </header> {# End post-header #}
+
+
     <div class="post-content">
-        {{ post.html_content | safe }} {# safe filter prevents Jinja from escaping HTML #}
-    </div>
-</article>
-<hr>
-<p><a href="{{ url_for_index() }}">← Back to Index</a></p>
+        {{ post.html_content | safe }}
+    </div> {# End post-content #}
+
+</article> {# End post #}
+
+<nav class="post-navigation">
+    <a href="{{ url_for_index() }}">← Back to Blog Index</a>
+</nav>
+
 {% endblock %}
