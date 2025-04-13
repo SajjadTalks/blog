@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"> {# Will add class="dark-mode" via JS #}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SajjadTalks Blog{% endblock %}</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for_static('style.css') }}">
+    {# Optional: Link generated pygments CSS if you use that method #}
+    {# <link rel="stylesheet" href="{{ url_for_static('pygments.css') }}"> #}
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div class="site-container">
+        <header class="site-header">
+            <div class="header-content">
+                <div class="header-branding">
+                     <h1><a href="{{ url_for_index() }}">Sajjad Talk</a></h1>
+                </div>
+
+                {# --- Search and Theme Toggle Area --- #}
+                <div class="header-controls">
+                     {# Search Input #}
+                     <div class="search-container">
+                         <input type="search" id="search-input" placeholder="Search posts..." aria-label="Search posts">
+                         <div id="search-results" class="search-results-box" aria-live="polite"></div>
+                     </div>
+                     {# Theme Toggle Button #}
+                     <button id="theme-toggle" class="theme-toggle-button" aria-label="Toggle dark mode">
+                          {# Icons will be handled by CSS/JS #}
+                         <span class="icon-sun">☀️</span>
+                         <span class="icon-moon">🌙</span>
+                     </button>
+                 </div>
+
+                <nav class="main-nav">
+                    {# Add nav links if needed #}
+                </nav>
+            </div>
+        </header>
+
+        <main class="site-content">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <footer class="site-footer">
+            <p>© {{ now().year }} SajjadTalks</p>
+        </footer>
+    </div> {# End site-container #}
+
+    {# --- JavaScript --- #}
+    {# Link the main script file, use defer to load after HTML parsing #}
+    <script src="{{ url_for_static('script.js') }}" defer></script>
+</body>
+</html>

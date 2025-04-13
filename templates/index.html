@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Blog Index{% if pagination and pagination.current_page > 1 %} - Page {{ pagination.current_page }}{% endif %} - My Modern Blog{% endblock %}
+
+{% block content %}
+<h2>Blog Posts</h2>
+
+{% if posts %}
+<ul class="post-list">
+    {% for post in posts %}
+    <li>
+        <h3><a href="{{ post.url }}">{{ post.metadata.title }}</a></h3>
+        <p class="post-meta">
+            Published on {{ post.date_obj.strftime('%B %d, %Y') }}
+            {% if post.metadata.author %} by {{ post.metadata.author }}{% endif %}
+        </p>
+        {% if post.metadata.summary %}
+            <p>{{ post.metadata.summary }}</p>
+        {% elif post.html_content %}
+             {# Optional: Show a snippet of content if no summary #}
+             {# <p>{{ post.html_content | striptags | truncate(150) }}</p> #}
+        {% endif %}
+         <p><a href="{{ post.url }}">Read more →</a></p>
+    </li>
+    {% endfor %}
+</ul>
+
+{# --- Pagination --- #}
+{% if pagination and pagination.total_pages > 1 %}
+<nav class="pagination" aria-label="Blog posts navigation">
+    <div class="page-info">
+        Page {{ pagination.current_page }} of {{ pagination.total_pages }}
+    </div>
+    <div class="nav-links">
+        {% if pagination.has_prev %}
+            <a href="{{ pagination.prev_url }}" class="prev-link" rel="prev">← Newer Posts</a>
+        {% else %}
+            <span class="prev-link disabled" aria-disabled="true">← Newer Posts</span>
+        {% endif %}
+
+        {% if pagination.has_next %}
+            <a href="{{ pagination.next_url }}" class="next-link" rel="next">Older Posts →</a>
+        {% else %}
+            <span class="next-link disabled" aria-disabled="true">Older Posts →</span>
+        {% endif %}
+    </div>
+</nav>
+{% endif %}
+{# --- End Pagination --- #}
+
+{% else %}
+    <p>No posts yet! Check back soon.</p>
+{% endif %}
+
+{% endblock %}

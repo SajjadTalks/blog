@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.metadata.title }} - My Blog{% endblock %}
+
+{% block content %}
+<article class="post">
+    <h2>{{ post.metadata.title }}</h2>
+    <p class="post-meta">
+        Published on {{ post.metadata.date }}
+        {% if post.metadata.author %} by {{ post.metadata.author }}{% endif %}
+    </p>
+    <div class="post-content">
+        {{ post.html_content | safe }} {# safe filter prevents Jinja from escaping HTML #}
+    </div>
+</article>
+<hr>
+<p><a href="{{ url_for_index() }}">← Back to Index</a></p>
+{% endblock %}
