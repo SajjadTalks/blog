@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تغییر اندازه لوگو با Python - SajjadTalks Blog</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="https://sajjadtalks.github.io/blog/static/style.css">
+    
+</head>
+<body>
+    <div class="site-container">
+        <header class="site-header">
+            <div class="header-content">
+                <div class="header-branding">
+                     <h1><a href="https://sajjadtalks.github.io/blog/index.html">Sajjad Talks</a></h1>
+                </div>
+
+                
+                <div class="header-controls">
+                     <div class="search-container">
+                         <input type="search" id="search-input" placeholder="Search posts..." aria-label="Search posts">
+                         <div id="search-results" class="search-results-box" aria-live="polite"></div>
+                     </div>
+                     <button id="theme-toggle" class="theme-toggle-button" aria-label="Toggle dark mode">
+                         <span class="icon-sun">☀️</span>
+                         <span class="icon-moon">🌙</span>
+                     </button>
+                 </div>
+                <nav class="main-nav">
+                    
+                </nav>
+            </div>
+        </header>
+
+        <main class="site-content">
+            
+<article class="post">
+
+
+    <header class="post-header">
+        <h1 class="post-title">تغییر اندازه لوگو با Python</h1>
+        <p class="post-meta">
+            Published on April 28, 2025 
+             by SajjadTalks
+        </p>
+    </header> 
+
+
+    <div class="post-content">
+        <div dir="rtl">
+<h1>تغییر اندازه لوگو با Python: ابزاری ساده و کارآمد</h1>
+<p>در دنیای امروز، لوگوها نقش کلیدی در هویت برند دارند. اما مشکلی که اکثر توسعه‌دهندگان و طراحان با آن مواجه می‌شوند، نیاز به تغییر اندازه لوگوها برای پلتفرم‌های مختلف است. از فیویکن وب‌سایت گرفته تا آیکون‌های اپ استور، هر کدام اندازه‌های خاص خود را دارند.</p>
+<h2>مشکل چیست؟</h2>
+<p>زمانی که می‌خواهید لوگوی خود را در سایزهای مختلف استفاده کنید، معمولاً با چالش‌های زیر مواجه می‌شوید:</p>
+<ul>
+<li>حفظ شفافیت پس‌زمینه</li>
+<li>نگه‌داشتن نسبت ابعاد</li>
+<li>کیفیت تصویر نهایی</li>
+<li>تکرار فرآیند برای سایزهای مختلف</li>
+</ul>
+<h2>راه‌حل: Logo Resizer</h2>
+<p>برای حل این مشکل، اسکریپت Python ساده‌ای نوشته‌ام که این کار را به صورت خودکار انجام می‌دهد. این ابزار با استفاده از کتابخانه Pillow کار می‌کند و ویژگی‌های زیر را دارد:</p>
+<h3>ویژگی‌های کلیدی</h3>
+<ul>
+<li><strong>حفظ شفافیت</strong>: پس‌زمینه شفاف باقی می‌ماند</li>
+<li><strong>نگه‌داشتن نسبت</strong>: لوگو تغییر شکل نمی‌دهد</li>
+<li><strong>وسط‌چینی خودکار</strong>: لوگو در مرکز قرار می‌گیرد</li>
+<li><strong>فرمت PNG</strong>: خروجی بهینه‌سازی شده</li>
+<li><strong>پشتیبانی از فرمت‌های مختلف</strong>: JPG، PNG، SVG و سایر فرمت‌ها</li>
+</ul>
+<h2>نحوه استفاده</h2>
+<h3>نصب وابستگی‌ها</h3>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>Pillow
+</code></pre></div>
+
+<h3>استفاده ساده</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># تغییر اندازه به 256x256 (پیش‌فرض)</span>
+python<span class="w"> </span>logo_resizer.py<span class="w"> </span>logo.png
+
+<span class="c1"># تعیین فایل خروجی</span>
+python<span class="w"> </span>logo_resizer.py<span class="w"> </span>logo.jpg<span class="w"> </span>-o<span class="w"> </span>my_resized_logo.png
+
+<span class="c1"># تعیین اندازه دلخواه</span>
+python<span class="w"> </span>logo_resizer.py<span class="w"> </span>logo.svg<span class="w"> </span>-s<span class="w"> </span><span class="m">512</span><span class="w"> </span><span class="m">512</span>
+</code></pre></div>
+
+<h2>مزایای استفاده</h2>
+<h3>سرعت و راحتی</h3>
+<p>به جای استفاده از نرم‌افزارهای سنگین گرافیکی، تنها با یک دستور می‌توانید کار خود را انجام دهید.</p>
+<h3>کیفیت بالا</h3>
+<p>استفاده از الگوریتم LANCZOS برای تغییر اندازه، کیفیت تصویر را حفظ می‌کند.</p>
+<h3>انعطاف‌پذیری</h3>
+<p>امکان تعیین اندازه‌های دلخواه برای نیازهای مختلف پروژه.</p>
+<h2>کاربردهای عملی</h2>
+<p>این ابزار برای موارد زیر مفید است:</p>
+<ul>
+<li>تهیه فیویکن وب‌سایت (16x16, 32x32)</li>
+<li>آیکون‌های شبکه‌های اجتماعی (400x400)</li>
+<li>آیکون‌های اپلیکیشن موبایل (512x512, 1024x1024)</li>
+<li>لوگوهای هدر وب‌سایت (300x100)</li>
+<li>تصاویر پروفایل (128x128, 256x256)</li>
+</ul>
+<h2>نکات تکنیکی</h2>
+<h3>حفظ شفافیت</h3>
+<p>اسکریپت ابتدا تصویر را به فرمت RGBA تبدیل می‌کند تا شفافیت حفظ شود.</p>
+<h3>الگوریتم تغییر اندازه</h3>
+<p>استفاده از <code>Image.Resampling.LANCZOS</code> کیفیت بالایی را تضمین می‌کند.</p>
+<h3>وسط‌چینی</h3>
+<p>لوگو در مرکز کنواس شفاف قرار می‌گیرد تا از هر طرف فاصله یکسان داشته باشد.</p>
+<h2>سورس کد</h2>
+<p>پروژه کامل در GitHub قابل دسترسی است:
+<a href="https://github.com/SajjadTalks/Logo-Resizer">https://github.com/SajjadTalks/Logo-Resizer</a></p>
+<h2>نتیجه‌گیری</h2>
+<p>این ابزار ساده اما قدرتمند می‌تواند زمان زیادی از شما بگیرد و فرآیند تغییر اندازه لوگو را کاملاً خودکار کند. برای توسعه‌دهندگان و طراحانی که بارها با این مشکل مواجه می‌شوند، این اسکریپت راه‌حل عملی و مؤثری است.</p>
+<p>اگر از این ابزار استفاده کردید یا پیشنهادی برای بهبود آن دارید، خوشحال می‌شوم نظرتان را بشنوم.</p>
+</div>
+    </div> 
+
+</article> 
+
+<nav class="post-navigation">
+    <a href="https://sajjadtalks.github.io/blog/index.html">← Back to Blog Index</a>
+</nav>
+
+
+        </main>
+
+        <footer class="site-footer">
+            
+            <div class="footer-links">
+                <a href="https://github.com/SajjadTalks" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+                    <i class="fab fa-github" aria-hidden="true"></i> GitHub
+                </a>
+                <span class="separator">|</span>
+                <a href="https://sajjadtalks.github.io/" target="_blank" rel="noopener noreferrer" aria-label="Personal Website">
+                    <i class="fas fa-globe" aria-hidden="true"></i> Website
+                </a>
+                 <span class="separator">|</span>
+                <a href="mailto:Sajjad_phone@proton.me" aria-label="Contact via Email">
+                    <i class="fas fa-envelope" aria-hidden="true"></i> Contact
+                </a>
+                <span class="separator">|</span>
+                <a href="https://t.me/SajjadTalks" target="_blank" rel="noopener noreferrer" aria-label="Telegram Profile">
+                    <i class="fab fa-telegram" aria-hidden="true"></i> Telegram 
+                </a>
+            </div>
+            
+            <p class="copyright">© 2025 SajjadTalks</p>
+            <p class="generated-by">Generated by Python</p>
+        </footer>
+    </div> 
+
+    
+    <script src="https://sajjadtalks.github.io/blog/static/script.js" defer></script>
+</body>
+</html>
